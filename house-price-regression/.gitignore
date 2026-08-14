@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+.venv/
+venv/
+
+# Testing
+.pytest_cache/
+.ruff_cache/
+htmlcov/
+.coverage
+
+# Jupyter
+.ipynb_checkpoints/
+
+# MLflow
+mlruns.db
+mlruns/
+mlartifacts/
+
+# OS
+.DS_Store
+
+# Editors
+.vscode/
+.idea/
+
+# Env
+.env
+
+# Generated data / models / reports (regenerate via `make train`)
+# Comment these out if you'd rather commit them for a fully turnkey clone.
+# data/raw/*.csv
+# models/*.joblib
+# reports/figures/*.png

@@ -1,0 +1,121 @@
+{
+  "best_model": "Ridge (1-SE)",
+  "alpha_choices": {
+    "Ridge": {
+      "alpha_min": 1.4208308325339238,
+      "alpha_1se": 65.09675230458177
+    },
+    "Lasso": {
+      "alpha_min": 0.00013141473626117567,
+      "alpha_1se": 0.002018760254679039
+    }
+  },
+  "elastic_net": {
+    "alpha": 0.0001,
+    "l1_ratio": 0.99
+  },
+  "lasso_zeroed_features": [
+    "age_of_house",
+    "bedroom_abvgr",
+    "half_bath",
+    "house_style_1.5Story",
+    "house_style_1Story",
+    "noise_2",
+    "noise_3",
+    "qual_x_cond",
+    "totrms_abvgrd",
+    "year_built",
+    "year_remod"
+  ],
+  "lasso_kept_features": [
+    "crime_index",
+    "distance_to_downtown_km",
+    "fireplaces",
+    "full_bath",
+    "garage_area",
+    "gr_liv_area",
+    "has_pool",
+    "house_style_2Story",
+    "house_style_SplitLevel",
+    "lot_area",
+    "median_income_area",
+    "neighborhood_Downtown",
+    "neighborhood_Hillcrest",
+    "neighborhood_Lakeside",
+    "neighborhood_Old Town",
+    "neighborhood_Riverside",
+    "neighborhood_Suburbia",
+    "noise_1",
+    "overall_cond",
+    "overall_qual",
+    "school_rating",
+    "total_bsmt_sf",
+    "total_sf"
+  ],
+  "metrics": [
+    {
+      "model": "Linear",
+      "test_rmse": 20034.84756500891,
+      "test_mae": 12308.235617219207,
+      "test_r2": 0.8894387594947731,
+      "test_adj_r2": 0.8827855167033082,
+      "test_mape_pct": 3.536213087855542,
+      "n_nonzero_coefs": 34,
+      "n_total_coefs": 34
+    },
+    {
+      "model": "Ridge (1-SE)",
+      "test_rmse": 20153.15446615278,
+      "test_mae": 12702.856952621061,
+      "test_r2": 0.8881291635777947,
+      "test_adj_r2": 0.881397113244423,
+      "test_mape_pct": 3.6684370527032724,
+      "n_nonzero_coefs": 34,
+      "n_total_coefs": 34
+    },
+    {
+      "model": "Ridge (min)",
+      "test_rmse": 20022.84753442905,
+      "test_mae": 12298.862984068803,
+      "test_r2": 0.8895711628916556,
+      "test_adj_r2": 0.8829258877382331,
+      "test_mape_pct": 3.5343327198045538,
+      "n_nonzero_coefs": 34,
+      "n_total_coefs": 34
+    },
+    {
+      "model": "Lasso (1-SE)",
+      "test_rmse": 20608.96096943118,
+      "test_mae": 13062.644119214798,
+      "test_r2": 0.8830115434035855,
+      "test_adj_r2": 0.8759715300862791,
+      "test_mape_pct": 3.797113127068362,
+      "n_nonzero_coefs": 23,
+      "n_total_coefs": 34
+    },
+    {
+      "model": "Lasso (min)",
+      "test_rmse": 19970.32938630482,
+      "test_mae": 12260.39257275125,
+      "test_r2": 0.8901496932135309,
+      "test_adj_r2": 0.8835392322741682,
+      "test_mape_pct": 3.526385212629374,
+      "n_nonzero_coefs": 32,
+      "n_total_coefs": 34
+    },
+    {
+      "model": "ElasticNet",
+      "test_rmse": 19984.985775922476,
+      "test_mae": 12271.316495427109,
+      "test_r2": 0.8899883939515971,
+      "test_adj_r2": 0.8833682265079764,
+      "test_mape_pct": 3.528550820759312,
+      "n_nonzero_coefs": 32,
+      "n_total_coefs": 34
+    }
+  ],
+  "n_train": 2400,
+  "n_test": 600,
+  "n_features_raw": 23,
+  "n_features_final": 34
+}

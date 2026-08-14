@@ -1,0 +1,82 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Lint (ruff)
+        run: |
+          pip install ruff
+          ruff check src/ api/ tests/ --output-format=github
+
+      - name: Generate dataset
+        run: python -m src.data.make_dataset
+
+      - name: Train models
+        run: python -m src.models.train
+
+      - name: Run tests
+        run: pytest tests/ -v --junitxml=test-results.xml
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-${{ matrix.python-version }}
+          path: test-results.xml
+
+      - name: Upload figures + metrics
+        if: matrix.python-version == '3.12'
+        uses: actions/upload-artifact@v4
+        with:
+          name: reports
+          path: |
+            reports/
+            models/production_model.joblib
+
+  docker:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download trained model + reports from test job
+        uses: actions/download-artifact@v4
+        with:
+          name: reports
+          path: .
+
+      - name: Build Docker image
+        run: docker build -t house-price-regression:ci .
+
+      - name: Smoke-test the container
+        run: |
+          docker run -d -p 8000:8000 --name api-smoke house-price-regression:ci
+          for i in $(seq 1 15); do
+            curl -sf http://localhost:8000/health && break
+            sleep 2
+          done
+          curl -sf http://localhost:8000/health
+          docker logs api-smoke
+          docker stop api-smoke

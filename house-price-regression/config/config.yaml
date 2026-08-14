@@ -1,0 +1,39 @@
+# =============================================================================
+# Project configuration — single source of truth for paths, seeds, and
+# hyperparameter search ranges. Scripts read this instead of hardcoding
+# values, so experiments stay reproducible and easy to tweak.
+# =============================================================================
+
+random_seed: 42
+current_year: 2026
+
+data:
+  n_samples: 3000
+  raw_path: "data/raw/house_prices_raw.csv"
+  processed_dir: "data/processed"
+  test_size: 0.2
+
+target:
+  column: "sale_price"
+  log_transform: true # models are trained on log1p(price), predictions are expm1-inverted
+
+cv:
+  n_folds: 5
+  shuffle: true
+
+alpha_search:
+  # log-spaced grid searched for Ridge / Lasso / ElasticNet
+  min_exp: -4
+  max_exp: 3
+  n_values: 60
+
+elastic_net:
+  l1_ratios: [0.1, 0.3, 0.5, 0.7, 0.9, 0.95, 0.99]
+
+bootstrap:
+  n_iterations: 200
+
+paths:
+  models_dir: "models"
+  figures_dir: "reports/figures"
+  metrics_path: "reports/metrics.json"

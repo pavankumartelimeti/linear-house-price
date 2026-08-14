@@ -1,0 +1,16 @@
+[project]
+name = "house-price-regression"
+version = "1.0.0"
+description = "Linear, Ridge & Lasso regression: from deliberately-engineered multicollinearity to a tested, deployable service."
+requires-python = ">=3.11"
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "PIE", "C4"]
+ignore = ["E501"]  # long lines: plots/formulas read better unwrapped
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
